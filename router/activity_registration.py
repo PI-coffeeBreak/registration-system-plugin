@@ -5,7 +5,7 @@ from dependencies.auth import get_current_user
 from sqlalchemy.orm import Session
 from fastapi import Path
 from dependencies.auth import check_role
-from depedencies.auth import get_current_user
+from dependencies.auth import get_current_user
 
 from ..models.activity_registration import ActivityMetadata, ActivityRegistration
 from ..schemas.activity_registration import ActivityMetadata, ActivityRegistration, ActivityMetadataUpdate
