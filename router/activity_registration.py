@@ -13,7 +13,8 @@ from ..models.activity_registration import ActivityRegistration as ActivityRegis
 from ..schemas.activity_registration import (
     ActivityMetadata as ActivityMetadataSchema,
     ActivityMetadataUpdate,
-    ActivityRegistration as ActivityRegistrationSchema
+    ActivityRegistration as ActivityRegistrationSchema,
+    SlotAvailability
 )
 
 router = Router()
@@ -84,3 +85,24 @@ def is_user_registered(
 
     registration = db.query(ActivityRegistrationModel).filter_by(activity_id=activity_id, user_id=user_id).first()
     return registration is not None
+
+@router.get("/register/{activity_id}/available-slots", response_model=SlotAvailability)
+def get_available_slots(
+    activity_id: int = Path(...),
+    db: Session = Depends(get_db)
+):
+    metadata = db.query(ActivityMetadataModel).filter_by(activity_id=activity_id).first()
+    if metadata is None:
+        raise HTTPException(status_code=404, detail="Metadata not found for this activity.")
+
+    if not metadata.is_restricted:
+        return SlotAvailability(message="Available slots are not restricted.")
+
+    total_registered = db.query(ActivityRegistrationModel).filter_by(activity_id=activity_id).count()
+    available_slots = metadata.slots - total_registered
+
+    return SlotAvailability(
+        available_slots=max(available_slots, 0),
+        total_slots=metadata.slots,
+        registered=total_registered
+    )

@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Optional
 
 class ActivityMetadataCreate(BaseModel):
     activity_id: int
@@ -25,3 +26,9 @@ class ActivityRegistration(BaseModel):
 
     class Config:
         from_attributes = True
+
+class SlotAvailability(BaseModel):
+    available_slots: Optional[int] = None
+    total_slots: Optional[int] = None
+    registered: Optional[int] = None
+    message: Optional[str] = None
