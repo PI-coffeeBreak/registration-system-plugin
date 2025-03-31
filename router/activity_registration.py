@@ -25,7 +25,7 @@ def set_metadata(
     activity_id: int = Path(...),
     metadata: ActivityMetadataUpdate = Depends(),
     db: Session = Depends(get_db),
-    user_info: dict = Depends(check_role(["organizer"]))
+    user_info: dict = Depends(check_role(["manage_activities", "organizer"]))
 ):
     db_metadata = db.query(ActivityMetadataModel).filter_by(activity_id=activity_id).first()
     
@@ -77,9 +77,12 @@ def get_metadata(
 @router.get("/register/{activity_id}/is-registered", response_model=bool)
 def is_user_registered(
     activity_id: int = Path(...),
+    user_id: str = None,
     db: Session = Depends(get_db),
-    user: dict = Depends(get_current_user)
+    _user: dict = Depends(check_role(["manage_activities", "organizer"])),
 ):
-    user_id = user["sub"]
+    if not user_id:
+        raise HTTPException(status_code=400, detail="Missing user_id query parameter")
+
     registration = db.query(ActivityRegistrationModel).filter_by(activity_id=activity_id, user_id=user_id).first()
     return registration is not None
