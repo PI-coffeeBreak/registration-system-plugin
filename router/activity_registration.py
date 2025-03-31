@@ -7,11 +7,9 @@ from fastapi import Path
 from dependencies.auth import check_role
 from dependencies.auth import get_current_user
 
-# Modelos SQLAlchemy
 from ..models.activity_registration import ActivityMetadata as ActivityMetadataModel
 from ..models.activity_registration import ActivityRegistration as ActivityRegistrationModel
 
-# Schemas Pydantic
 from ..schemas.activity_registration import (
     ActivityMetadata as ActivityMetadataSchema,
     ActivityMetadataUpdate,
