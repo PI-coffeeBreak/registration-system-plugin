@@ -64,9 +64,7 @@ def register_user(
     db.refresh(registration)
     return registration
 
-from ..schemas.activity_registration import DeregistrationResponse
-
-@router.delete("/register/{activity_id}", response_model=DeregistrationResponse)
+@router.delete("/deregister/{activity_id}", response_model=DeregistrationResponse)
 def deregister_user(
     activity_id: int = Path(...),
     db: Session = Depends(get_db),
