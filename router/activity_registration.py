@@ -14,7 +14,8 @@ from ..schemas.activity_registration import (
     ActivityMetadata as ActivityMetadataSchema,
     ActivityMetadataUpdate,
     ActivityRegistration as ActivityRegistrationSchema,
-    SlotAvailability
+    SlotAvailability,
+    DeregistrationResponse
 )
 
 router = Router()
@@ -62,6 +63,24 @@ def register_user(
     db.commit()
     db.refresh(registration)
     return registration
+
+from ..schemas.activity_registration import DeregistrationResponse
+
+@router.delete("/register/{activity_id}", response_model=DeregistrationResponse)
+def deregister_user(
+    activity_id: int = Path(...),
+    db: Session = Depends(get_db),
+    user: dict = Depends(get_current_user)
+):
+    user_id = user["sub"]
+
+    registration = db.query(ActivityRegistrationModel).filter_by(user_id=user_id, activity_id=activity_id).first()
+    if not registration:
+        raise HTTPException(status_code=404, detail="No registration found for this activity.")
+
+    db.delete(registration)
+    db.commit()
+    return {"activity_id": activity_id, "user_id": user_id}
 
 @router.get("/metadata/{activity_id}", response_model=ActivityMetadataSchema)
 def get_metadata(
