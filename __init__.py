@@ -3,7 +3,7 @@ import logging
 from services.ui.plugin_settings import create_plugin_setting, delete_plugin_setting_by_title
 from schemas.plugin_setting import PluginSetting
 
-logger = logging.getLogger("coffeebreak.plugins.activity_registration")
+logger = logging.getLogger("coffeebreak.activity-registration")
 
 PLUGIN_TITLE = "Activities Registration"
 PLUGIN_DESCRIPTION = "This plugin allows managing user registrations for activities with defined limits."
