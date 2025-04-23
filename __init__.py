@@ -5,7 +5,7 @@ from schemas.plugin_setting import PluginSetting
 
 logger = logging.getLogger("coffeebreak.activity-registration")
 
-PLUGIN_TITLE = "Activities Registration"
+PLUGIN_TITLE = "registration-system-plugin"
 PLUGIN_DESCRIPTION = "This plugin allows managing user registrations for activities with defined limits."
 
 async def register_plugin():
