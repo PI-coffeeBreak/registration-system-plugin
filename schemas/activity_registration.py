@@ -32,3 +32,7 @@ class SlotAvailability(BaseModel):
     total_slots: Optional[int] = None
     registered: Optional[int] = None
     message: Optional[str] = None
+
+class DeregistrationResponse(BaseModel):
+    activity_id: int
+    user_id: str
