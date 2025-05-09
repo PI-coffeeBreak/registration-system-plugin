@@ -20,6 +20,9 @@ from ..schemas.activity_registration import (
 
 router = Router()
 
+def get_user_id(user: dict) -> str:
+    return user.get("sub")
+
 @router.post("/metadata/{activity_id}", response_model=ActivityMetadataSchema)
 def set_metadata(
     activity_id: int = Path(...),
@@ -44,9 +47,9 @@ def set_metadata(
 def register_user(
     activity_id: int = Path(...),
     db: Session = Depends(get_db),
-    user: dict = Depends(get_current_user)
+    user: dict = Depends(get_current_user(force_auth=True))
 ):
-    user_id = user["sub"]
+    user_id = get_user_id(user)
 
     existing = db.query(ActivityRegistrationModel).filter_by(user_id=user_id, activity_id=activity_id).first()
     if existing:
@@ -68,9 +71,9 @@ def register_user(
 def deregister_user(
     activity_id: int = Path(...),
     db: Session = Depends(get_db),
-    user: dict = Depends(get_current_user)
+    user: dict = Depends(get_current_user(force_auth=True))
 ):
-    user_id = user["sub"]
+    user_id = get_user_id(user)
 
     registration = db.query(ActivityRegistrationModel).filter_by(user_id=user_id, activity_id=activity_id).first()
     if not registration:
