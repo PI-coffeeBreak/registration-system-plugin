@@ -90,7 +90,7 @@ def get_metadata(
         raise HTTPException(status_code=404, detail="Metadata not found for this activity.")
     return metadata
 
-@router.get("/register/{activity_id}/is-registered", response_model=bool)
+@router.get("/register/{activity_id}/is-registered/", response_model=bool)
 def is_user_registered(
     activity_id: int = Path(...),
     user_id: str = None,
@@ -103,7 +103,7 @@ def is_user_registered(
     registration = db.query(ActivityRegistrationModel).filter_by(activity_id=activity_id, user_id=user_id).first()
     return registration is not None
 
-@router.get("/register/{activity_id}/available-slots", response_model=SlotAvailability)
+@router.get("/register/{activity_id}/available-slots/", response_model=SlotAvailability)
 def get_available_slots(
     activity_id: int = Path(...),
     db: Session = Depends(get_db)
