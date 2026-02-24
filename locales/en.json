@@ -1,0 +1,26 @@
+{
+  "activities": {
+    "editSlotsTitle": "Manage Activity Registration",
+    "noActivities": "No activities found",
+    "noDescription": "No description",
+    "edit": "Edit activity",
+    "imageAlt": "Activity image",
+    "noImage": "No image",
+    "slots": {
+      "modalTitle": "Registration Slots",
+      "label": "Slots: {{count}}",
+      "open": "Open",
+      "limitLabel": "Slot limit",
+      "slotPlaceholder": "e.g. 100",
+      "noMetadataInfo": "No slot configuration available for this activity.",
+      "saveSuccess": "Slots saved successfully",
+      "saveError": "Failed to save slots"
+    }
+  },
+  "common": {
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  }
+}

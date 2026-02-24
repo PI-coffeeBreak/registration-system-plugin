@@ -1,0 +1,26 @@
+{
+  "activities": {
+    "editSlotsTitle": "Gerir Inscrições nas Atividades",
+    "noActivities": "Nenhuma atividade encontrada",
+    "noDescription": "Sem descrição",
+    "edit": "Editar atividade",
+    "imageAlt": "Imagem da atividade",
+    "noImage": "Sem imagem",
+    "slots": {
+      "modalTitle": "Vagas de Inscrição",
+      "label": "Vagas: {{count}}",
+      "open": "Aberto",
+      "limitLabel": "Limite de vagas",
+      "slotPlaceholder": "ex: 100",
+      "noMetadataInfo": "Nenhuma configuração de vagas disponível para esta atividade.",
+      "saveSuccess": "Vagas salvas com sucesso",
+      "saveError": "Falha ao salvar vagas"
+    }
+  },
+  "common": {
+    "actions": {
+      "save": "Salvar",
+      "cancel": "Cancelar"
+    }
+  }
+}
