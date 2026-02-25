@@ -1,0 +1,7 @@
+fileignoreconfig:
+- filename: models/activity_registration.py
+  checksum: 8a945be9bc9be5242a674bc80eb72a4160bcf5720dbb6740be6ee528b095cfad
+- filename: admin/Page.jsx
+  checksum: ac01c45a37ea0382cbfb7945ed75fca70084d30bbb899e7931dc8421635f6fe9
+- filename: .build/pages/registration-system-plugin.mjs
+  checksum: 93397e2fca1133feafce940ee087121ce81db7652a31733279cae35518603dea
